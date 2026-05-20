@@ -1,4 +1,4 @@
-module one_bit_alu (
+module top (
     input  wire A,
     input  wire B,
     input  wire S0,

@@ -2,11 +2,11 @@
 //
 // Operations:
 // S2 S1 S0 | Operation
-// ---------+----------------
+// ---------+-----------
 // 0  0  0  | A AND B
 // 0  0  1  | A OR B
-// 0  1  0  | A XOR B
-// 0  1  1  | A + B
+// 0  1  0  | A + B
+// 0  1  1  | A + B (with carry)
 // 1  0  0  | NOT A
 // 1  0  1  | NOT B
 // 1  1  0  | Unused

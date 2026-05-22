@@ -17,13 +17,13 @@ module tb_one_bit_alu;
     );
 
     task apply;
-        input a, b, s2, s1, s0;
+        input a, b, s0, s1, s2;
         begin
             A  = a;
             B  = b;
-            S2 = s2;
-            S1 = s1;
             S0 = s0;
+            S1 = s1;
+            S2 = s2;
             #10;
             $display("%b %b | %b  %b  %b  | %b %b", A, B, S0, S1, S2, R, C);
         end
@@ -38,43 +38,44 @@ module tb_one_bit_alu;
     endtask
 
     initial begin
-        // NONE (110, 111)
+
+        // NONE (1 1 -)
         print_header("NONE");
         apply(1,1,1,1,0);
         apply(1,1,1,1,1);
 
-        // NOT A (100)
+        // NOT A (1 0 0)
         print_header("NOT A");
         apply(0,0,1,0,0);
         apply(1,0,1,0,0);
 
-        // NOT B (101)
+        // NOT B (1 0 1)
         print_header("NOT B");
         apply(0,0,1,0,1);
         apply(0,1,1,0,1);
 
-        // AND (000)
+        // AND (0 0 0)
         print_header("AND");
         apply(0,0,0,0,0);
         apply(0,1,0,0,0);
         apply(1,0,0,0,0);
         apply(1,1,0,0,0);
 
-        // OR (001)
+        // OR (0 0 1)
         print_header("OR");
         apply(0,0,0,0,1);
         apply(0,1,0,0,1);
         apply(1,0,0,0,1);
         apply(1,1,0,0,1);
 
-        // ADD (010) - R only
+        // ADD (0 1 0) - R only
         print_header("ADD (R only)");
         apply(0,0,0,1,0);
         apply(0,1,0,1,0);
         apply(1,0,0,1,0);
         apply(1,1,0,1,0);
 
-        // ADD (011) - R and C
+        // ADD (0 1 1) - R + C
         print_header("ADD (R + C)");
         apply(0,0,0,1,1);
         apply(0,1,0,1,1);

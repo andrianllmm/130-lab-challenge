@@ -1,11 +1,23 @@
 `timescale 1ns / 1ps
 
-module tb_one_bit_alu;
+/*
+This testbench verifies the functionality of the
+alu_1bit module by applying multiple input
+combinations and checking expected outputs.
 
+It also generates a waveform file (VCD) for GTKWave analysis.
+*/
+
+module tb_alu_1bit;
+
+    // Testbench Inputs (Registers)
     reg A, B;
     reg S0, S1, S2;
+
+    // DUT Outputs (Wires)
     wire R, C;
 
+    // Instantiate Device Under Test (DUT)
     alu_1bit uut (
         .A(A),
         .B(B),
@@ -16,6 +28,19 @@ module tb_one_bit_alu;
         .C(C)
     );
 
+    /*
+    Waveform Dump Setup
+    Creates a VCD file for GTKWave visualization.
+    */
+    initial begin
+        $dumpfile("sim/dump.vcd"); // output waveform file
+        $dumpvars(0, tb_alu_1bit); // dump all signals
+    end
+
+    /*
+    Apply Input Task
+    Sets input values, waits for propagation delay, then prints current output state.
+    */
     task apply;
         input a, b, s0, s1, s2;
         begin
@@ -25,10 +50,14 @@ module tb_one_bit_alu;
             S1 = s1;
             S2 = s2;
             #10;
-            $display("%b %b | %b  %b  %b  | %b %b", A, B, S0, S1, S2, R, C);
+            $display("%b %b | %b %b %b | %b %b", A, B, S0, S1, S2, R, C);
         end
     endtask
 
+    /*
+    Print Header Task
+    Prints a header for each test case.
+    */
     task print_header;
         input [100*8:1] name;
         begin
@@ -37,8 +66,10 @@ module tb_one_bit_alu;
         end
     endtask
 
+    /*
+    Test Sequence
+    */
     initial begin
-
         // NONE (1 1 -)
         print_header("NONE");
         apply(1,1,1,1,0);

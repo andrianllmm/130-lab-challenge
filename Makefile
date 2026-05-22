@@ -2,9 +2,9 @@
 # and cleanup for the access control Verilog project.
 
 # Design source file
-SRC = src/one_bit_alu.v
+SRC = src/alu_1bit.v src/arithmetic_unit.v src/logic_unit.v src/mux_8to1.v
 # Testbench file
-TB = tb/tb_one_bit_alu.v
+TB = tb/tb_alu_1bit.v
 # Simulation output directory
 SIM_DIR = sim
 # Compiled simulation executable
